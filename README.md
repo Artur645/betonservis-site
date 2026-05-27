@@ -1,16 +1,12 @@
 # Бетонсервис — лендинг
 
-React/Vite лендинг для продажи бетона и растворов в Стерлитамаке.
+React/Vite сайт для продажи бетона и растворов в Стерлитамаке.
 
-## Запуск локально
+## Переменные окружения в Vercel
 
-```bash
-npm install
-npm run dev
-```
+Добавьте в Project Settings → Environment Variables:
 
-## Сборка
+- TELEGRAM_BOT_TOKEN
+- TELEGRAM_CHAT_ID
 
-```bash
-npm run build
-```
+После добавления переменных сделайте Redeploy.
