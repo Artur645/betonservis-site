@@ -1,4 +1,16 @@
- import React from "react";
+const token = "8938245731:AAGm2tRTzKlNakxle7eRvsKJb0eqfFgfFcs";
+const chatId = "480082577";
+
+fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    chat_id: chatId,
+    text: "Новая заявка с сайта Бетонсервис",
+  }),
+}); import React from "react";
 import { createRoot } from "react-dom/client";
 
 function App() {
