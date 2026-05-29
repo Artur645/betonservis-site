@@ -115,22 +115,27 @@ const [form, setForm] = useState({
   name: '',
   phone: '',
   address: ''
-});const sendTelegram = async () => {
-  const token = 'ВАШ_ТОКЕН_БОТА';
+ });
+
+const sendTelegram = async () => {
+  const token = '8938245731:AAGm2tRTzK1Nakxle7eRvsKJb0eqfFgFfCs';
   const chatId = '480082577';
 
-  const text = `🟡 Новая заявка с сайта Бетонсервис
+  const text = ``🟡 Новая заявка с сайта Бетонсервис
 
 Имя: ${form.name}
 Телефон/Telegram: ${form.phone}
 Марка бетона: ${grade}
-Адрес/объём: ${form.address}`;
+Адрес/объём: ${form.address}`;          
 
   await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ chat_id: chatId, text })
   });
+
+  alert('Заявка отправлена!');
+};
 
   alert('Заявка отправлена!');
 };
