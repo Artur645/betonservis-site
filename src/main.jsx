@@ -111,7 +111,29 @@ function ConcreteLanding() {
   const [volume, setVolume] = useState(10);
   const [grade, setGrade] = useState('М300');
   const [distance, setDistance] = useState(10);
+const [form, setForm] = useState({
+  name: '',
+  phone: '',
+  address: ''
+});const sendTelegram = async () => {
+  const token = 'ВАШ_ТОКЕН_БОТА';
+  const chatId = '480082577';
 
+  const text = `🟡 Новая заявка с сайта Бетонсервис
+
+Имя: ${form.name}
+Телефон/Telegram: ${form.phone}
+Марка бетона: ${grade}
+Адрес/объём: ${form.address}`;
+
+  await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: chatId, text })
+  });
+
+  alert('Заявка отправлена!');
+};
   const estimated = useMemo(() => volume * prices[grade], [volume, grade]);
   const deliveryPrice = useMemo(() => getDeliveryPrice(distance), [distance]);
   const totalWithDelivery = estimated + deliveryPrice;
@@ -140,11 +162,11 @@ function ConcreteLanding() {
 
       <main>
         <section className="hero">
-          <div className="hero-bg" />
-          <div className="container hero-grid">
-            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <div className="badge"><Truck size={16} /> Собственное производство бетона</div>
-              <h1>Бетон и раствор с доставкой в Стерлитамаке</h1>
+          <input placeholder="Ваше имя" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+<input placeholder="Телефон или Telegram" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+<select value={grade} onChange={(e) => setGrade(e.target.value)}>{Object.keys(prices).map((g) => <option key={g}>{g}</option>)}</select>
+<textarea placeholder="Адрес объекта и примерный объём" value={form.address} onChange={(e) => setForm({ ...form, address: e.target.value })} />
+<Button onClick={sendTelegram}><Send size={18} /> Отправить заявку в Telegram</Button>
               <p className="hero-text">Производство и доставка бетона по Стерлитамаку и Республике Башкортостан. Работаем с частными клиентами, застройщиками и юридическими лицами.</p>
               <div className="hero-actions">
                 <Button>Получить расчёт цены</Button>
