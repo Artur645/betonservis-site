@@ -117,7 +117,7 @@ function ConcreteLanding() {
     address: '',
   });
 
- const sendTelegram = async () => {
+const sendTelegram = async () => {
   try {
     const response = await fetch('/api/telegram', {
       method: 'POST',
@@ -139,7 +139,7 @@ function ConcreteLanding() {
     alert('Ошибка отправки заявки');
   }
 };
-  };
+
   const estimated = useMemo(() => volume * prices[grade], [volume, grade]);
   const deliveryPrice = useMemo(() => getDeliveryPrice(distance), [distance]);
   const totalWithDelivery = estimated + deliveryPrice;
