@@ -111,34 +111,39 @@ function ConcreteLanding() {
   const [volume, setVolume] = useState(10);
   const [grade, setGrade] = useState('М300');
   const [distance, setDistance] = useState(10);
-const [form, setForm] = useState({
-  name: '',
-  phone: '',
-  address: ''
- });
+  const [form, setForm] = useState({
+    name: '',
+    phone: '',
+    address: '',
+  });
 
-const sendTelegram = async () => {
-  const token = '8938245731:AAGm2tRTzK1Nakxle7eRvsKJb0eqfFgFfCs';
-  const chatId = '480082577';
+  const sendTelegram = async () => {
+    const token = '8938245731:AAGm2tRTzK1Nakxle7eRvsKJb0eqfFgFfCs';
+    const chatId = '480082577';
 
-  const text = ``🟡 Новая заявка с сайта Бетонсервис
+    const text = `🟡 Новая заявка с сайта Бетонсервис
 
 Имя: ${form.name}
 Телефон/Telegram: ${form.phone}
 Марка бетона: ${grade}
-Адрес/объём: ${form.address}`;          
+Адрес/объём: ${form.address}`;
 
-  await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: chatId, text })
-  });
+    try {
+      const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: chatId, text }),
+      });
 
-  alert('Заявка отправлена!');
-};
+      if (!response.ok) {
+        throw new Error('Telegram не принял заявку');
+      }
 
-  alert('Заявка отправлена!');
-};
+      alert('Заявка отправлена!');
+    } catch (error) {
+      alert('Ошибка отправки заявки. Проверьте Telegram-бота.');
+    }
+  };
   const estimated = useMemo(() => volume * prices[grade], [volume, grade]);
   const deliveryPrice = useMemo(() => getDeliveryPrice(distance), [distance]);
   const totalWithDelivery = estimated + deliveryPrice;
@@ -167,11 +172,10 @@ const sendTelegram = async () => {
 
       <main>
         <section className="hero">
-          <input placeholder="Ваше имя" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
-<input placeholder="Телефон или Telegram" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
-<select value={grade} onChange={(e) => setGrade(e.target.value)}>{Object.keys(prices).map((g) => <option key={g}>{g}</option>)}</select>
-<textarea placeholder="Адрес объекта и примерный объём" value={form.address} onChange={(e) => setForm({ ...form, address: e.target.value })} />
-<Button onClick={sendTelegram}><Send size={18} /> Отправить заявку в Telegram</Button>
+          <div className="container hero-grid">
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+              <div className="badge"><Truck size={16} /> Собственное производство бетона</div>
+              <h1>Бетон и раствор с доставкой в Стерлитамаке</h1>
               <p className="hero-text">Производство и доставка бетона по Стерлитамаку и Республике Башкортостан. Работаем с частными клиентами, застройщиками и юридическими лицами.</p>
               <div className="hero-actions">
                 <Button>Получить расчёт цены</Button>
@@ -189,11 +193,11 @@ const sendTelegram = async () => {
                 <h2>Заявка на расчёт</h2>
                 <p>Оставьте телефон — менеджер уточнит адрес, объём и марку бетона.</p>
                 <div className="form-stack">
-                  <input placeholder="Ваше имя" />
-                  <input placeholder="Телефон или Telegram" />
-                  <select defaultValue="М300">{Object.keys(prices).map((g) => <option key={g}>{g}</option>)}</select>
-                  <textarea placeholder="Адрес объекта и примерный объём" />
-                  <Button><Send size={18} /> Отправить заявку в Telegram</Button>
+                  <input placeholder="Ваше имя" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+                  <input placeholder="Телефон или Telegram" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+                  <select value={grade} onChange={(e) => setGrade(e.target.value)}>{Object.keys(prices).map((g) => <option key={g}>{g}</option>)}</select>
+                  <textarea placeholder="Адрес объекта и примерный объём" value={form.address} onChange={(e) => setForm({ ...form, address: e.target.value })} />
+                  <Button onClick={sendTelegram}><Send size={18} /> Отправить заявку в Telegram</Button>
                   <small>Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</small>
                 </div>
               </Card>
@@ -317,10 +321,10 @@ const sendTelegram = async () => {
             <h2>Получите расчёт в Telegram</h2>
             <p>Оставьте данные — менеджер получит заявку и свяжется с вами для расчёта бетона, доставки и времени подачи.</p>
             <div className="form-stack">
-              <input placeholder="Ваше имя" />
-              <input placeholder="Телефон или Telegram" />
-              <textarea placeholder="Что нужно: бетон, раствор, марка, объём, адрес" />
-              <Button><Send size={18} /> Отправить заявку в Telegram</Button>
+              <input placeholder="Ваше имя" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+              <input placeholder="Телефон или Telegram" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+              <textarea placeholder="Что нужно: бетон, раствор, марка, объём, адрес" value={form.address} onChange={(e) => setForm({ ...form, address: e.target.value })} />
+              <Button onClick={sendTelegram}><Send size={18} /> Отправить заявку в Telegram</Button>
             </div>
           </Card>
         </section>
