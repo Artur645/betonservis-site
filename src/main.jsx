@@ -117,32 +117,28 @@ function ConcreteLanding() {
     address: '',
   });
 
-  const sendTelegram = async () => {
-    const token = '8938245731:AAGm2tRTzK1Nakxle7eRvsKJb0eqfFgFfCs';
-    const chatId = '480082577';
+ const sendTelegram = async () => {
+  try {
+    const response = await fetch('/api/telegram', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: form.name,
+        phone: form.phone,
+        grade,
+        address: form.address,
+      }),
+    });
 
-    const text = `🟡 Новая заявка с сайта Бетонсервис
-
-Имя: ${form.name}
-Телефон/Telegram: ${form.phone}
-Марка бетона: ${grade}
-Адрес/объём: ${form.address}`;
-
-    try {
-      const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: chatId, text }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Telegram не принял заявку');
-      }
-
-      alert('Заявка отправлена!');
-    } catch (error) {
-      alert('Ошибка отправки заявки. Проверьте Telegram-бота.');
+    if (!response.ok) {
+      throw new Error('Ошибка отправки');
     }
+
+    alert('Заявка отправлена!');
+  } catch (error) {
+    alert('Ошибка отправки заявки');
+  }
+};
   };
   const estimated = useMemo(() => volume * prices[grade], [volume, grade]);
   const deliveryPrice = useMemo(() => getDeliveryPrice(distance), [distance]);
