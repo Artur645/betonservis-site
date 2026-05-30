@@ -134,7 +134,7 @@ function ConcreteLanding() {
       throw new Error('Ошибка отправки');
     }
 
-    alert('Заявка отправлена!');
+    alert('ТЕСТ НОВОЙ ВЕРСИИ');
   } catch (error) {
     alert('Ошибка отправки заявки');
   }
