@@ -153,7 +153,7 @@ function ConcreteLanding() {
       if (!response.ok) {
         throw new Error('Send error');
       }
-
+reachGoal('telegram_form_submit');
       alert('Заявка отправлена!');
       setForm({ name: '', phone: '', address: '' });
     } catch (error) {
