@@ -154,9 +154,9 @@ function ConcreteLanding() {
             <a href="#contacts">Контакты</a>
           </nav>
 
-          <a className="call-link" href="tel:+73473214585">
-            <Phone size={16} /> 8 (3473) 21-45-85
-          </a>
+          <a className="call-link" href="tel:+79174194825">
+  <Phone size={16} /> +7 (917) 419-48-25
+</a>
         </div>
       </header>
 
