@@ -203,7 +203,13 @@ reachGoal('telegram_form_submit');
                 <Button onClick={() => document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth' })}>
                   Получить расчёт цены
                 </Button>
-                <Button variant="outline" onClick={() => window.open('https://t.me/Zartur25', '_blank')}>
+                <Button
+  variant="outline"
+  onClick={() => {
+    reachGoal('telegram_click');
+    window.open('https://t.me/Zartur25', '_blank');
+  }}
+>
                   <Send size={18} /> Написать в Telegram
                 </Button>
               </div>
