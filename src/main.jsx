@@ -463,7 +463,7 @@ function ConcreteLanding() {
     <p>ул. Бабушкина, 167Б</p>
     <p>Координаты: 53.684991, 55.993519</p>
 
-```
+
 <a
   href="https://yandex.ru/maps/?pt=55.993519,53.684991&z=16&l=map"
   target="_blank"
@@ -472,7 +472,7 @@ function ConcreteLanding() {
 >
   Построить маршрут
 </a>
-```
+
 
   </div>
 </div>
