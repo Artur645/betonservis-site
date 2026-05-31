@@ -18,7 +18,34 @@ import {
   Truck,
 } from 'lucide-react';
 import './styles.css';
+const YM_ID = 109545983;
 
+function reachGoal(goal) {
+  if (typeof window !== 'undefined' && window.ym) {
+    window.ym(YM_ID, 'reachGoal', goal);
+  }
+}
+
+(function initYandexMetrika() {
+  if (typeof window === 'undefined' || window.ym) return;
+
+  window.ym = window.ym || function () {
+    (window.ym.a = window.ym.a || []).push(arguments);
+  };
+  window.ym.l = 1 * new Date();
+
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = 'https://mc.yandex.ru/metrika/tag.js';
+  document.head.appendChild(script);
+
+  window.ym(YM_ID, 'init', {
+    clickmap: true,
+    trackLinks: true,
+    accurateTrackBounce: true,
+    webvisor: true
+  });
+})();
 const prices = {
   'М100': 4400,
   'М150': 4600,
