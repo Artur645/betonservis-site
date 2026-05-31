@@ -442,11 +442,41 @@ function ConcreteLanding() {
             </div>
           </div>
 
-          <div className="map-placeholder">
-            <MapPin size={54} />
-            <strong>Карта Яндекс</strong>
-            <span>Место для интерактивной карты</span>
-          </div>
+        <div className="map-placeholder">
+  <iframe
+    src="https://yandex.ru/map-widget/v1/?ll=55.993519%2C53.684991&z=16"
+    width="100%"
+    height="320"
+    frameBorder="0"
+    allowFullScreen={true}
+    style={{
+      border: '0',
+      borderRadius: '16px',
+      width: '100%',
+      height: '320px'
+    }}
+  />
+
+  <div style={{ marginTop: '15px', textAlign: 'left' }}>
+    <strong>Производство Бетонсервис</strong>
+    <p>Республика Башкортостан, г. Стерлитамак</p>
+    <p>ул. Бабушкина, 167Б</p>
+    <p>Координаты: 53.684991, 55.993519</p>
+
+```
+<a
+  href="https://yandex.ru/maps/?pt=55.993519,53.684991&z=16&l=map"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="btn btn-primary"
+>
+  Построить маршрут
+</a>
+```
+
+  </div>
+</div>
+
         </section>
 
         <section id="delivery" className="section section-dark">
