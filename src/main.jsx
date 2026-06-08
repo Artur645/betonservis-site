@@ -205,10 +205,13 @@ reachGoal('telegram_form_submit');
                 </Button>
                 <Button
   variant="outline"
-  onClick={() => {
-    reachGoal('telegram_click');
-    https://t.me/betonservis_str_bot
-  }}
+onClick={() => {
+  reachGoal('telegram_click');
+  window.open(
+    'https://t.me/betonservis_str_bot',
+    '_blank'
+  );
+}}
 >
                   <Send size={18} /> Написать в Telegram
                 </Button>
