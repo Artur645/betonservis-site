@@ -49,11 +49,11 @@ function reachGoal(goal) {
 const prices = {
   'М100': 4400,
   'М150': 4600,
-  'М200': 5000,
-  'М250': 5400,
-  'М300': 5900,
-  'М350': 6400,
-  'М400': 7000,
+  'М200': 4900,
+  'М250': 5200,
+  'М300': 5500,
+  'М350': 6000,
+  'М400': 6500,
 };
 
 const mortarPrices = [
@@ -207,7 +207,7 @@ reachGoal('telegram_form_submit');
   variant="outline"
   onClick={() => {
     reachGoal('telegram_click');
-    window.open('https://t.me/Zartur25', '_blank');
+    https://t.me/betonservis_str_bot
   }}
 >
                   <Send size={18} /> Написать в Telegram
